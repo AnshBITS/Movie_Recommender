@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Movie Recommender</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Movie Recommender</h1>
+            <p>Find your next favorite movie!</p>
+        </header>
+        <form action="/recommend" method="get" class="search-form">
+            <input type="text" name="movie" placeholder="Enter a movie title" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+        {% if recommendations %}
+            <section class="recommendations">
+                <h2>Recommendations for "{{ movie_title }}":</h2>
+                <ul>
+                    {% for movie in recommendations %}
+                        <li><a href="/movie/{{ movie }}">{{ movie }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+    </div>
+</body>
+</html>
